@@ -17,7 +17,7 @@ from homeassistant.const import (
 )
 from . import sonnenbatterie_v2
 
-class SonnenbatterieFlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
+class Sonnenbatteriev2FlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
     def __init__(self):
         """Initialize."""
         self.data_schema = CONFIG_SCHEMA_A
