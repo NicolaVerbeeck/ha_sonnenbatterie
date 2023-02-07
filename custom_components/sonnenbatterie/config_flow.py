@@ -15,6 +15,7 @@ from homeassistant.const import (
     CONF_IP_ADDRESS,
     CONF_SCAN_INTERVAL,
 )
+from . import sonnenbatterie_v2
 
 class SonnenbatterieFlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
     def __init__(self):
