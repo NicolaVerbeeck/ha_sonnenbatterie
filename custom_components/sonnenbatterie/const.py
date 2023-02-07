@@ -3,8 +3,8 @@ import voluptuous as vol
 from datetime import timedelta
 from homeassistant.helpers import config_validation as cv
 from homeassistant.const import (
-    CONF_PASSWORD,
-    CONF_USERNAME,
+    CONF_TOKEN,
+    CONF_NAME,
     CONF_IP_ADDRESS,
     CONF_SCAN_INTERVAL
 )
@@ -15,9 +15,9 @@ DEFAULT_SCAN_INTERVAL = 10
 
 CONFIG_SCHEMA_A=vol.Schema(
             {
-                vol.Required(CONF_USERNAME): vol.In(["User", "Installer"]),
-                vol.Required(CONF_PASSWORD): str,
+                vol.Required(CONF_TOKEN): str,
                 vol.Required(CONF_IP_ADDRESS): str,
+                vol.Required(CONF_NAME): str,
             }
 )
 

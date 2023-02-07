@@ -1,6 +1,4 @@
 
-# pylint: disable=no-name-in-module
-from sonnenbatterie import sonnenbatterie
 # pylint: enable=no-name-in-module
 import traceback
 import logging
@@ -12,11 +10,12 @@ from .const import * #
 # pylint: enable=unused-wildcard-import
 import voluptuous as vol
 from homeassistant.const import (
-    CONF_PASSWORD,
-    CONF_USERNAME,
+    CONF_TOKEN,
+    CONF_NAME,
     CONF_IP_ADDRESS,
     CONF_SCAN_INTERVAL,
 )
+from sonnenbatterie_v2 import sonnenbatterie_v2
 
 
 class SonnenbatterieFlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
@@ -31,15 +30,14 @@ class SonnenbatterieFlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
         if not user_input:
             return self._show_form()
 
-        username = user_input[CONF_USERNAME]
-        password = user_input[CONF_PASSWORD]
+        token = user_input[CONF_TOKEN]
         ipaddress=user_input[CONF_IP_ADDRESS]
-
+        name=user_input[CONF_NAME]
 
         try:
-            def _internal_setup(_username,_password,_ipaddress):
-                return sonnenbatterie(_username,_password,_ipaddress)
-            sonnenInst=await self.hass.async_add_executor_job(_internal_setup,username,password,ipaddress);
+            def _internal_setup(_token,_ipaddress):
+                return sonnenbatterie_v2(_ipaddress, _token)
+            sonnenInst=await self.hass.async_add_executor_job(_internal_setup,token,ipaddress);
             #sonnenbatterie(username,password,ipaddress)
             #await self.hass.async_add_executor_job(
             #    Abode, username, password, True, True, True, cache
@@ -55,8 +53,8 @@ class SonnenbatterieFlowHandler(config_entries.ConfigFlow,domain=DOMAIN):
         return self.async_create_entry(
             title=user_input[CONF_IP_ADDRESS],
             data={
-                CONF_USERNAME: username,
-                CONF_PASSWORD: password,
+                CONF_NAME: name,
+                CONF_TOKEN: token,
                 CONF_IP_ADDRESS: ipaddress,
             },
         )

@@ -4,9 +4,10 @@ import json
 import voluptuous as vol
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.entity import Entity
+from sonnenbatterie_v2 import sonnenbatterie_v2
 from homeassistant.const import (
-    CONF_PASSWORD,
-    CONF_USERNAME,
+    CONF_TOKEN,
+    CONF_NAME,
     CONF_IP_ADDRESS,
     CONF_SCAN_INTERVAL
 )
