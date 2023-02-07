@@ -7,7 +7,6 @@ from .const import *
 import threading
 import time
 from homeassistant.helpers import config_validation as cv
-from sonnenbatterie_v2 import sonnenbatterie_v2
 
 from homeassistant.components.sensor import (
     SensorEntity,
